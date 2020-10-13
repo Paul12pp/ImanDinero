@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "1005282678722",
+    "firebase_url": "https://iman-dinero.firebaseio.com",
+    "project_id": "iman-dinero",
+    "storage_bucket": "iman-dinero.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005282678722:android:ecd727b3f918e17010285b",
+        "android_client_info": {
+          "package_name": "com.moneyiman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005282678722-84r16j38bqj9466kks0u180bfhl725in.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRQb-rY1FWXnWU29Y5IukTK4zMBfVf3e4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005282678722-84r16j38bqj9466kks0u180bfhl725in.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-6814305195151125~6056880574"
+    }
+  ],
+  "configuration_version": "1"
+}

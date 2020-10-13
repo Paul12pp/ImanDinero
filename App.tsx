@@ -23,33 +23,60 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import { Icon } from 'react-native-elements'
-import { Dimensions } from 'react-native';
 import NotifServices from './src/services/NotifService';
+import admob, { AdEventType, InterstitialAd } from '@react-native-firebase/admob';
+import { BannerAd, BannerAdSize } from '@react-native-firebase/admob';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const unitId = 'ca-app-pub-6814305195151125/1343787550';
+const unitIdInstertical ='ca-app-pub-6814305195151125/2584571246'
 
+const interstitial = InterstitialAd.createForAdRequest(unitIdInstertical, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+});
 const App = () => {
   const notif = new NotifServices();
   const [press, setPress] = useState(styles.rounded);
   const [texted, setTexted] = useState(styles.textRound);
   const [isPress, setIsPress] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const onPress = () => {
+    console.log('pressed');
     if (!isPress) {
       setPress(styles.roundedP)
       setTexted(styles.textRounded)
       setIsPress(true)
+      if(loaded){
+        interstitial.show();
+      }
     } else {
       setPress(styles.rounded)
       setTexted(styles.textRound)
       setIsPress(false)
     }
   }
+  useEffect(() => {
+    const eventListener = interstitial.onAdEvent(type => {
+      if (type === AdEventType.LOADED) {
+        setLoaded(true);
+      }
+      if (type === AdEventType.CLOSED) {
+        setLoaded(false);
+       
+        //reload ad 
+        interstitial.load();
+      }
+    });
 
-  useEffect (() => {
-    notif.localSchedule();
-  },[]);
+    // Start loading the interstitial straight away
+    interstitial.load();
+      notif.localSchedule();
+      // Unsubscribe from events on unmount
+      return () => {
+        eventListener();
+      };
+  }, []);
 
   return (
     <>
@@ -69,6 +96,16 @@ const App = () => {
           <TouchableOpacity style={press} onPress={onPress}>
             <Text style={texted}>{!isPress ? 'Encender Imán' : 'Apagar Imán'}</Text>
           </TouchableOpacity>
+        </View>
+        <View>
+          <BannerAd
+            unitId={unitId}
+            size={BannerAdSize.SMART_BANNER}
+            onAdFailedToLoad={() => console.log('failed')}
+            onAdLoaded={() => console.log('loaded')}
+            onAdClosed={()=>console.log('closed')}
+            onAdOpened={()=>console.log('opened')}
+            onAdLeftApplication={()=>console.log('left app')} />
         </View>
       </SafeAreaView>
     </>

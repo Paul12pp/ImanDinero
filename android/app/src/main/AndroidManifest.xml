@@ -5,6 +5,7 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
   <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme">
+    <!-- Anuncios -->
     <meta-data android:name="com.dieam.reactnativepushnotification.notification_foreground" android:value="false"/>
     <!-- Change the resource name to your App's accent color - or any other color you want -->
     <meta-data android:name="com.dieam.reactnativepushnotification.notification_color" android:resource="@color/green"/>
